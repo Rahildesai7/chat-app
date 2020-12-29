@@ -14,9 +14,10 @@ let socket;
 const Chat = ({location}) => {
     const [name, setName] = useState('');
     const [room, setRoom] = useState('');
+    const [users, setUsers] = useState('');
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
-    const ENDPOINT = 'localhost:5000';
+    const ENDPOINT = 'https://chat-app-rahil.herokuapp.com/';
 
     useEffect(()=>{
         //const data = queryString.parse(location.search);
@@ -47,7 +48,12 @@ const Chat = ({location}) => {
     useEffect(()=>{
         socket.on('message', (message)=>{
             setMessages([...messages, message]);
-        })
+        });
+
+        socket.on("roomData", ({ users }) => {
+            setUsers(users);
+          });
+
     }, [messages])
 
     const sendMessage = (event)=>{

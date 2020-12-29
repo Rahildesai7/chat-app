@@ -12,8 +12,6 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
     cors: {
-        orgin :"http://localhost:5000",
-        credentials: true
     }
 });
 
